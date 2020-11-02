@@ -11,6 +11,6 @@ class ComentarioSeeder extends Seeder
      */
     public function run()
     {
-        //
+        $Comentarios = factory(App\Model::class, 3)->make();
     }
 }

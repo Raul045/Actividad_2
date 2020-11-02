@@ -15,7 +15,7 @@ class ChecarPass
      */
     public function handle($request, Closure $next)
     {
-        if ($request->Sex == "F") {
+        if ($request->password == true) {
             return abort(400);
         }
         return $next($request);
