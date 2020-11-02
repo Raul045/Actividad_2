@@ -10,8 +10,8 @@ class UserController extends Controller
 {
     public function MostrarUser($id = null){
         if($id)
-            return response()->json(["users"=>User::find($id)],200);
-        return response()->json(["user"=>User::all()],200);
+            return response()->json(["user"=>User::find($id)],200);
+        return response()->json(["users"=>User::all()],200);
     }
 
     public function guardarUser(Request $request){

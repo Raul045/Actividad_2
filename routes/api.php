@@ -30,11 +30,12 @@ Route::put("/comentarios/{id?}","API\ComentarioController@CambiarCom")->where("i
 Route::delete("/comentarios/{id?}","API\ComentarioController@EliminarCom")->where("id","[0-9]+");
 
 /*Apartado para los usuarios*/
-Route::get("/users/{id?}", "UserController@MostrarUser")->where("id","[0-9]+");
-Route::post("/users", "UserController@guardarUser");
-Route::put("/users/{id?}", "UserController@CambiarUser")->where("id","[0-9]+");
-Route::delete("/users/{id?}", "UserController@EliminarUser")->where("id","[0-9]+");
-Route::get("/users1", "UserController@ConsultaAv");
+Route::get("/users/{id?}", "API\UserController@MostrarUser")->where("id","[0-9]+");
+Route::post("/users", "API\UserController@guardarUser")->middleware('checar.pass');
+Route::put("/users/{id?}", "API\UserController@CambiarUser")->where("id","[0-9]+");
+Route::delete("/users/{id?}", "API\UserController@EliminarUser")->where("id","[0-9]+");
+Route::get("/users1", "API\UserController@ConsultaAv");
+
 
 /*Comentarios * Productos*/
 Route::get("productos/{id}/comentarios","API\ComentarioController@obtenerCP")->where("id","[0-9]+");
