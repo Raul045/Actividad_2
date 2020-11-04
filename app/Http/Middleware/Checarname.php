@@ -4,7 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 
-class ChecarPass
+class Checarname
 {
     /**
      * Handle an incoming request.
@@ -15,7 +15,8 @@ class ChecarPass
      */
     public function handle($request, Closure $next)
     {
-        if ($request->password == true) {
+        $name = BD::table('users')->select('name')->where('id',$request->id)->get();
+        if ($request->name == exist) {
             return abort(400);
         }
         return $next($request);

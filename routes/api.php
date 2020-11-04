@@ -31,7 +31,7 @@ Route::delete("/comentarios/{id?}","API\ComentarioController@EliminarCom")->wher
 
 /*Apartado para los usuarios*/
 Route::get("/users/{id?}", "API\UserController@MostrarUser")->where("id","[0-9]+");
-Route::post("/users", "API\UserController@guardarUser")->middleware('checar.pass');
+Route::post("/users", "API\UserController@guardarUser")->middleware('checar.name');
 Route::put("/users/{id?}", "API\UserController@CambiarUser")->where("id","[0-9]+");
 Route::delete("/users/{id?}", "API\UserController@EliminarUser")->where("id","[0-9]+");
 Route::get("/users1", "API\UserController@ConsultaAv");
@@ -39,3 +39,11 @@ Route::get("/users1", "API\UserController@ConsultaAv");
 
 /*Comentarios * Productos*/
 Route::get("productos/{id}/comentarios","API\ComentarioController@obtenerCP")->where("id","[0-9]+");
+
+/*middleware tokens*/
+Route::middleware('auth:sanctum')->get('user', 'App\Http\Controllers\APIAuth\AuthController@index');
+Route::middleware('auth:sanctum')->delete('Salir', 'App\Http\Controllers\APIAuth\AuthController@Salir');
+
+/*Las Rutas*/
+Route::post('login', 'App\Http\Controllers\APIAuth\AuthController@entrar');
+Route::post('registro', 'App\Http\Controllers\APIAuth\AuthController@regis');
