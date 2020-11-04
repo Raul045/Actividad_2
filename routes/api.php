@@ -41,9 +41,10 @@ Route::get("/users1", "API\UserController@ConsultaAv");
 Route::get("productos/{id}/comentarios","API\ComentarioController@obtenerCP")->where("id","[0-9]+");
 
 /*middleware tokens*/
-Route::middleware('auth:sanctum')->get('user', 'App\Http\Controllers\APIAuth\AuthController@index');
-Route::middleware('auth:sanctum')->delete('Salir', 'App\Http\Controllers\APIAuth\AuthController@Salir');
+Route::middleware('auth:sanctum')->get('user', 'APIAuth\AuthController@index');
+Route::middleware('auth:sanctum')->delete('Salir', 'APIAuth\AuthController@Salir');
+Route::middleware('auth:sanctum')->post('permisos', 'APIAuth\AuthController@darpermisos');
 
 /*Las Rutas*/
-Route::post('login', 'App\Http\Controllers\APIAuth\AuthController@entrar');
-Route::post('registro', 'App\Http\Controllers\APIAuth\AuthController@regis');
+Route::post('login', 'APIAuth\AuthController@entrar');
+Route::post('registro', 'APIAuth\AuthController@regis');

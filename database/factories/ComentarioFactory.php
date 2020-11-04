@@ -9,7 +9,7 @@ $factory->define(Model::class, function (Faker $faker) {
     return [
         'titulo'=>$faker->word,
         'contenido' => $faker->sentence($nbWords = 6, $variableNbWords = true),
-        'producto_id' => $faker->all()->random()->id,
-        'usuario_id' => $faker->all()->random()->id,
+        'producto_id' => 'App\Modelos\Producto'->all()->random()->id,
+        'usuario_id' => 'App\User'->all()->random()->id,
     ];
 });

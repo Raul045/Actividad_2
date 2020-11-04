@@ -23,8 +23,8 @@ class AuthController extends Controller
     }
     public function entrar(Request $request){
         $request->validate([
-            'email' => required|email,
-            'password' => required,
+            'email' => 'required|email',
+            'password' => 'required',
         ]);
 
         $user = User::where('email', $request->email)->first();
@@ -54,6 +54,20 @@ class AuthController extends Controller
             return response()->json($user, 200);
         
         return abort(422, "Fallo al registrar");
+    }
+    public function darpermisos(Request $request){
+        if($request->user()->tokenCan('admin:admin'))
+           $request->validate([
+            'email'=>'required|email'
+        ]);
+        $user = User::where('email', $request->email)->first();
+        if(!$user){
+            throw ValidationException::withMessages([
+                'email'=>["El usuario no es correcto. Verifica tus datos"],
+            ]);
+            $token = $user->createToken($request->email, ['user:edit'])->plainTextToken;
+            return response()->json(["token"=>$token],201);
+        }
     }
 
 }
